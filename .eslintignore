@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+node_modules
+/.vscode
+/.git
+=======
+node_modules
+/.vscode
+/.git
+/.prettierrc
