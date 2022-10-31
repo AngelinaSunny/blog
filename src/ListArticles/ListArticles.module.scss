@@ -1,0 +1,13 @@
+@import '../helpers/variables.scss';
+
+.articles {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 68%;
+}
+.pagination {
+  margin-left: auto;
+  margin-right: auto;
+}
