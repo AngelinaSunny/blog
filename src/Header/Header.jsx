@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { NotAuthorizedHeader } from '../NotAuthorizedHeader/NotAuthorizedHeader';
 import { AuthorizedHeader } from '../AuthorizedHeader/AuthorizedHeader';
@@ -10,7 +11,9 @@ export const Header = () => {
 
   return (
     <div className={classes.header}>
-      <h6>Realworld Blog</h6>
+      <Link to="/articles" className={classes.title}>
+        Realworld Blog
+      </Link>
       {isAuthorized ? <AuthorizedHeader /> : <NotAuthorizedHeader />}
     </div>
   );

@@ -8,8 +8,10 @@
   max-width: 1440px;
   min-height: 80px;
 
-  h6 {
+  .title {
     font: $font_inter;
     font-size: 1.125rem;
+    text-decoration: none;
+    color: $name-color;
   }
 }
