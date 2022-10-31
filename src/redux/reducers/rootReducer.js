@@ -1,8 +1,11 @@
-import { defaultStore } from '../defaultStore';
+import { combineReducers } from 'redux';
 
-export const rootReducer = (state = defaultStore, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+import { articlesReducer } from './articlesReducer';
+import { personReducer } from './personReducer';
+import { slugArticleReducer } from './slugArticleReducer';
+
+export const rootReducer = combineReducers({
+  articles: articlesReducer,
+  person: personReducer,
+  article: slugArticleReducer,
+});

@@ -28,6 +28,7 @@
   },
   "plugins": ["react", "prettier", "import"],
   "rules": {
+    "no-nested-ternary": "off",
     "indent": "off",
     "no-console": "off",
     "react/static-property-placement": "off",
