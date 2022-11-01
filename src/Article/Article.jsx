@@ -1,15 +1,15 @@
 import { intlFormat } from 'date-fns';
 import { useSelector } from 'react-redux/es/exports';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
-// import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-
-// import { setSlugArticle } from '../redux/actions/slugArticle';
+import { Link, useMatch } from 'react-router-dom';
 
 import classes from './Article.module.scss';
 
 export const Article = ({ slug, favorited, tagList, createdAt, title, favoritesCount, author, description }) => {
   const { isAuthorized } = useSelector((store) => store.person);
+  const match = useMatch('/articles');
+  const linkSlug = match ? slug : `articles/${slug}`;
+
   const like = favorited ? <span className={classes.red}> ❤ </span> : <span className={classes.empty}> ♡ </span>;
   const tags =
     tagList.length > 1 ? (
@@ -33,7 +33,7 @@ export const Article = ({ slug, favorited, tagList, createdAt, title, favoritesC
     <article className={classes.article}>
       <div className={classes.info}>
         <div>
-          <Link to={`${slug}`} className={classes.header}>
+          <Link to={`${linkSlug}`} className={classes.header}>
             {title}
           </Link>
           <button type="button" disabled={!isAuthorized}>

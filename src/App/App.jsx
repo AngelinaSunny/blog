@@ -1,27 +1,18 @@
-import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 import { Layout } from '../Layout/Layout';
-import { SlugArticle } from '../SlugArticle/SlugArticle';
+import { SlugArticle, getSlugArticle } from '../SlugArticle/SlugArticle';
 import { ListArticles } from '../ListArticles/ListArticles';
-import { getArticles } from '../services/getArticles';
+import { ErrorPage } from '../ErrorPage/ErrorPage';
 
-export const App = () => {
-  const dispatch = useDispatch();
-  const { offset } = useSelector((store) => store.articles);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<ListArticles />} />
+      <Route path="articles" element={<ListArticles />} errorElement={<ErrorPage />} />
+      <Route path="articles/:slug" element={<SlugArticle />} loader={getSlugArticle} errorElement={<ErrorPage />} />
+    </Route>
+  )
+);
 
-  useEffect(() => {
-    dispatch(getArticles(offset));
-  }, [offset]);
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<ListArticles />} />
-        <Route path="articles" element={<ListArticles />} />
-        <Route path="articles/:slug" element={<SlugArticle />} />
-        <Route path="*" element={<Layout />} />
-      </Route>
-    </Routes>
-  );
-};
+export const App = () => <RouterProvider router={router} />;

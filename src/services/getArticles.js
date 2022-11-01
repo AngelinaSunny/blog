@@ -7,7 +7,7 @@ export const getArticles =
       .then((res) => {
         if (!res.ok) {
           dispatch(fetchError());
-          throw Error('Ошибка запроса статей');
+          throw new Response('', { status: res.status, statusText: 'Not found' });
         }
         return res.json();
       })
@@ -15,4 +15,6 @@ export const getArticles =
         dispatch(fetchArticles(json));
         dispatch(fetchIsLoading());
       })
-      .catch((e) => console.log(e.message));
+      .catch((e) => {
+        throw new Response('', { status: e.status, statusText: 'Not found' });
+      });
