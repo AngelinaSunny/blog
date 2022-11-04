@@ -23,19 +23,22 @@
     background-color: #fff;
     font-size: 1.125rem;
   }
-  div {
+  a {
     display: flex;
     align-items: center;
+    text-decoration: none;
   }
-  div > span {
+  a > span {
     font: $font_inter;
+    color: $name-color;
     margin-left: 19px;
     text-transform: capitalize;
     font-size: 1.125rem;
   }
-  div > img {
+  a > img {
     margin-left: 19px;
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
   }
 }

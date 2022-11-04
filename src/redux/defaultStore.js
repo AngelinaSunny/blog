@@ -1,6 +1,20 @@
+import avatar from '../AuthorizedHeader/avatar.png';
+
+const checkLocal = localStorage.getItem('isAuthorized');
+console.log(localStorage.getItem('isAuthorized'));
+
 export const defaultStore = {
   person: {
-    isAuthorized: false,
+    newPerson: {},
+    error: false,
+  },
+
+  personLogIn: {
+    isAuthorized: checkLocal,
+    username: localStorage.getItem('username') ? localStorage.getItem('username') : null,
+    email: localStorage.getItem('email') ? localStorage.getItem('email') : null,
+    avatar: localStorage.getItem('avatar') ? localStorage.getItem('avatar') : avatar,
+    error: false,
   },
 
   articles: {
@@ -9,12 +23,5 @@ export const defaultStore = {
     error: false,
     isLoading: false,
     offset: 0,
-  },
-
-  article: {
-    slug: 'some-article-title-7twltx',
-    slugArticle: null,
-    slugIsLoading: false,
-    errorSlug: false,
   },
 };

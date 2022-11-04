@@ -7,7 +7,7 @@ import { AuthorizedHeader } from '../AuthorizedHeader/AuthorizedHeader';
 import classes from './Header.module.scss';
 
 export const Header = () => {
-  const { isAuthorized } = useSelector((state) => state.person);
+  const { isAuthorized } = useSelector((state) => state.personLogIn);
 
   return (
     <div className={classes.header}>

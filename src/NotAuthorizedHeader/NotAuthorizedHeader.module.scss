@@ -1,19 +1,22 @@
 @import '../helpers/variables.scss';
 
-.header-buttons {
-  button {
+.header-links {
+  a {
+    display: inline-block;
     padding: 10px 18px;
     margin-left: 19px;
     text-transform: capitalize;
     cursor: pointer;
     font: $font_inter;
     font-size: 1.125rem;
+    text-decoration: none;
   }
-  .btn-in {
+  .link-in {
     border: none;
     background-color: #fff;
+    color: $text-color;
   }
-  .btn-up {
+  .link-up {
     color: $green;
     background-color: #fff;
     border: 1px solid $green;
