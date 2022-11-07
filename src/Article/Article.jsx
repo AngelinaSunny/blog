@@ -27,7 +27,6 @@ export const Article = ({ slug, favorited, tagList, createdAt, title, favoritesC
     },
     { locale: 'en-US' }
   );
-  // const dispatch = useDispatch();
 
   return (
     <article className={classes.article}>

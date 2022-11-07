@@ -11,6 +11,7 @@ import { SignIn } from '../SignIn/SignIn';
 import { EditProfile } from '../EditProfile/EditProfile';
 import { getAuthorizedUser } from '../services/getAuthorizedUser';
 import { NewArticle } from '../NewArticle/NewArticle';
+import { RequireAuth } from '../hoc/RequireAuth';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,9 +20,17 @@ const router = createBrowserRouter(
       <Route path="sign-up" element={<CreateAccount />} />
       <Route path="sign-in" element={<SignIn />} />
       <Route path="profile" element={<EditProfile />} />
-      <Route path="new-article" element={<NewArticle />} />
+      <Route
+        path="new-article"
+        element={
+          <RequireAuth>
+            <NewArticle />
+          </RequireAuth>
+        }
+      />
       <Route path="articles" element={<ListArticles />} />
       <Route path="articles/:slug" element={<SlugArticle />} loader={getSlugArticle} errorElement={<ErrorPage />} />
+      <Route path="articles/:slug/edit" element={<NewArticle />} />
     </Route>
   )
 );

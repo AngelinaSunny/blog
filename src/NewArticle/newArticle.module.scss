@@ -10,6 +10,7 @@
     0px 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725), 0px 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
   border-radius: 6px;
   h6 {
+    margin-bottom: 21px;
     text-align: center;
     font-size: 1.25rem;
     font: $font_roboto_bold;
@@ -17,14 +18,52 @@
   }
   form {
     width: 100%;
+
     font: $font_roboto_normal;
     font-size: 0.875rem;
+    button {
+      cursor: pointer;
+      border-radius: 4px;
+    }
     label {
-      input {
+      display: block;
+      margin-bottom: 21px;
+      input,
+      textarea {
         width: 100%;
+        padding: 7px;
+        border: 1px solid $placeholder;
+        border-radius: 4px;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        font: $font_roboto_normal;
+        color: $placeholder;
+        font-size: 1rem;
+      }
+      input:focus,
+      input:active,
+      textarea:focus,
+      textarea:active {
+        outline: none;
+        border: 2px solid $link;
       }
       .tag {
         width: 300px;
+      }
+      .tag-button {
+        margin-right: 17px;
+        margin-left: 17px;
+        padding: 8px 36px;
+        background-color: #fff;
+        color: red;
+        border: 1px solid red;
+      }
+      .errors {
+        color: red;
+      }
+      .input-error {
+        border-color: red;
       }
     }
     .tags-wrap {
@@ -33,7 +72,24 @@
       div {
         display: flex;
         flex-direction: column;
+        label {
+          margin-bottom: 5px;
+        }
+      }
+      .add-button {
+        margin-bottom: 5px;
+        padding: 8px 36px;
+        background-color: #fff;
+        color: $link;
+        border: 1px solid $link;
       }
     }
+  }
+  .send {
+    width: 320px;
+    height: 40px;
+    color: #fff;
+    background-color: $link;
+    border: none;
   }
 }

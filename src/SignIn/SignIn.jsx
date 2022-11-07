@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { Alert, Fade } from '@mui/material';
@@ -16,6 +16,9 @@ export const SignIn = () => {
     formState: { errors, isValid },
   } = useForm({ mode: 'onChange' });
   const navigation = useNavigate();
+  const location = useLocation();
+
+  const fromPage = location.state?.from?.pathname || '/';
 
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.person);
@@ -40,7 +43,7 @@ export const SignIn = () => {
             const res = await dispatch(fetchLogIn(data));
             if (res === 'ok') {
               reset();
-              navigation('../');
+              navigation(fromPage);
             }
           })}
         >

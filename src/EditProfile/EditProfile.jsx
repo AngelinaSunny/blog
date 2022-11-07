@@ -1,22 +1,23 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux/es/exports';
 
-/// import { setNewImg, setNewUsername, setNewEmail, setNewPassword } from '../redux/actions/personLogIn';
 import { updateUser } from '../services/updateUser';
+import { getAuthorizedUser } from '../services/getAuthorizedUser';
 
 import classes from './editProfile.module.scss';
 
 export const EditProfile = () => {
   const navigation = useNavigate();
+  const dispatch = useDispatch();
   const { email, username, password } = useSelector((state) => state.personLogIn);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ mode: 'onChange' });
-  const dispatch = useDispatch();
+  } = useForm({ mode: 'onBlur' });
 
   return (
     <div className={classes['form-wrapper']}>
@@ -24,15 +25,14 @@ export const EditProfile = () => {
       <form
         onSubmit={handleSubmit((data) => {
           console.log('data:', data);
-          dispatch(
-            updateUser({
-              username: data.username,
-              email: data.email,
-              password: data.password ? data.password : password,
-              image: data.image,
-            })
-          );
+          updateUser({
+            username: data.username,
+            email: data.email,
+            password: data.password ? data.password : password,
+            image: data.image,
+          });
           reset({ password: '', image: '' });
+          dispatch(getAuthorizedUser());
           navigation('../articles');
         })}
       >
@@ -50,7 +50,7 @@ export const EditProfile = () => {
               },
               maxLength: {
                 value: 21,
-                message: 'Username must not exceed 40 characters.',
+                message: 'Username must not exceed 20 characters.',
               },
               pattern: {
                 value: /[-A-Za-z0-9_\s]+$/i,

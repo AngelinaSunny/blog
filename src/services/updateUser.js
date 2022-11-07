@@ -1,6 +1,4 @@
-import { setNewImg } from '../redux/actions/personLogIn';
-
-export const updateUser = (data) => (dispatch) => {
+export const updateUser = (data) => {
   const token = localStorage.getItem('token');
   const user = JSON.stringify({
     user: {
@@ -10,18 +8,17 @@ export const updateUser = (data) => (dispatch) => {
       image: data.image,
     },
   });
-  console.log('user: ', user);
 
   fetch('https://blog.kata.academy/api/user', {
     method: 'PUT',
     headers: {
       Authorization: `Token ${token}`,
+      'Content-Type': 'application/json',
     },
     body: user,
   })
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
-      dispatch(setNewImg(data.image));
     });
 };

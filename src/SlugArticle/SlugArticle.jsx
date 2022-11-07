@@ -1,17 +1,31 @@
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { intlFormat } from 'date-fns';
-import { useLoaderData, defer, Await } from 'react-router-dom';
+import { useLoaderData, defer, Await, Link, useLocation, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { PacmanLoader } from 'react-spinners';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
+
+import { deleteArticle } from '../services/deleteArticle';
 
 import classes from './slugArticle.module.scss';
 
 export const SlugArticle = () => {
   const { article } = useLoaderData();
+  const [open, setOpen] = useState(false);
 
-  const { isAuthorized } = useSelector((state) => state.personLogIn);
+  const { isAuthorized, username } = useSelector((state) => state.personLogIn);
+  const location = useLocation();
+  const slug = location.pathname;
+  const navigation = useNavigate();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <article className={classes.article}>
@@ -56,6 +70,47 @@ export const SlugArticle = () => {
                       )}
                     </span>
                     <img src={art.author.image} alt="avatar" />
+                    {isAuthorized && art.author.username === username && (
+                      <div className={classes['button-wrap']}>
+                        <button type="button" className={classes.delete} onClick={handleClickOpen}>
+                          Delete
+                        </button>
+                        {open && (
+                          <div className={classes.modal}>
+                            <div />
+                            <p>Are you sure to delete this article?</p>
+                            <div className={classes['modal-btns']}>
+                              <button type="button" onClick={handleClose}>
+                                No
+                              </button>
+                              <button
+                                type="button"
+                                onClick={async () => {
+                                  const res = await deleteArticle(slug);
+                                  if (res === 'ok') {
+                                    navigation('/articles');
+                                  }
+                                }}
+                              >
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                        <Link
+                          to="edit"
+                          className={classes.edit}
+                          state={{
+                            title: art.title,
+                            description: art.description,
+                            text: art.body,
+                            tagList: art.tagList,
+                          }}
+                        >
+                          Edit
+                        </Link>
+                      </div>
+                    )}
                   </div>
                   <div className={classes.description}>{art.description}</div>
                 </section>
