@@ -11,7 +11,7 @@ import classes from './slugArticle.module.scss';
 export const SlugArticle = () => {
   const { article } = useLoaderData();
 
-  const { isAuthorized } = useSelector((state) => state.person);
+  const { isAuthorized } = useSelector((state) => state.personLogIn);
 
   return (
     <article className={classes.article}>

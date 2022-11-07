@@ -1,4 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux/es/exports';
 
 import { Layout } from '../Layout/Layout';
 import { SlugArticle, getSlugArticle } from '../SlugArticle/SlugArticle';
@@ -7,6 +9,8 @@ import { ErrorPage } from '../ErrorPage/ErrorPage';
 import { CreateAccount } from '../CreateAccount/CreateAccount';
 import { SignIn } from '../SignIn/SignIn';
 import { EditProfile } from '../EditProfile/EditProfile';
+import { getAuthorizedUser } from '../services/getAuthorizedUser';
+import { NewArticle } from '../NewArticle/NewArticle';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,10 +19,18 @@ const router = createBrowserRouter(
       <Route path="sign-up" element={<CreateAccount />} />
       <Route path="sign-in" element={<SignIn />} />
       <Route path="profile" element={<EditProfile />} />
+      <Route path="new-article" element={<NewArticle />} />
       <Route path="articles" element={<ListArticles />} />
       <Route path="articles/:slug" element={<SlugArticle />} loader={getSlugArticle} errorElement={<ErrorPage />} />
     </Route>
   )
 );
 
-export const App = () => <RouterProvider router={router} />;
+export const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAuthorizedUser());
+  }, []);
+
+  return <RouterProvider router={router} />;
+};

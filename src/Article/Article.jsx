@@ -6,7 +6,7 @@ import { Link, useMatch } from 'react-router-dom';
 import classes from './Article.module.scss';
 
 export const Article = ({ slug, favorited, tagList, createdAt, title, favoritesCount, author, description }) => {
-  const { isAuthorized } = useSelector((store) => store.person);
+  const { isAuthorized } = useSelector((store) => store.personLogIn);
   const match = useMatch('/articles');
   const linkSlug = match ? slug : `articles/${slug}`;
 

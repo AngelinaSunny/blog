@@ -2,13 +2,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { setNewImg, setNewUsername, setNewEmail, setNewPassword } from '../redux/actions/personLogIn';
+/// import { setNewImg, setNewUsername, setNewEmail, setNewPassword } from '../redux/actions/personLogIn';
+import { updateUser } from '../services/updateUser';
 
 import classes from './editProfile.module.scss';
 
 export const EditProfile = () => {
   const navigation = useNavigate();
-  const { email, username } = useSelector((state) => state.personLogIn);
+  const { email, username, password } = useSelector((state) => state.personLogIn);
   const {
     register,
     handleSubmit,
@@ -22,23 +23,16 @@ export const EditProfile = () => {
       <h6>Edit Profile</h6>
       <form
         onSubmit={handleSubmit((data) => {
-          if (data.avatar) {
-            dispatch(setNewImg(data.avatar));
-            localStorage.setItem('avatar', data.avatar);
-          }
-          if (data.username) {
-            dispatch(setNewUsername(data.username));
-            localStorage.setItem('username', data.username);
-          }
-          if (data.email) {
-            dispatch(setNewEmail(data.email));
-            localStorage.setItem('email', data.email);
-          }
-          if (data.password) {
-            dispatch(setNewPassword(data.password));
-            localStorage.setItem('password', data.password);
-          }
-          reset({ password: '', avatar: '' });
+          console.log('data:', data);
+          dispatch(
+            updateUser({
+              username: data.username,
+              email: data.email,
+              password: data.password ? data.password : password,
+              image: data.image,
+            })
+          );
+          reset({ password: '', image: '' });
           navigation('../articles');
         })}
       >
@@ -108,12 +102,12 @@ export const EditProfile = () => {
           <input
             type="url"
             placeholder="Avatar image"
-            className={errors.avatar ? classes['input-error'] : null}
-            {...register('avatar', {
+            className={errors.image ? classes['input-error'] : null}
+            {...register('image', {
               required: false,
             })}
           />
-          <p className={classes.errors}>{errors.avatar?.message}</p>
+          <p className={classes.errors}>{errors.image?.message}</p>
         </label>
         <button type="submit">Save</button>
       </form>

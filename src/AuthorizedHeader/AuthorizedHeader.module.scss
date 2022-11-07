@@ -3,7 +3,8 @@
 .header-buttons {
   display: flex;
   align-items: center;
-  button {
+  button,
+  .create-article {
     padding: 10px 18px;
     margin-left: 19px;
     text-transform: capitalize;

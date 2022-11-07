@@ -12,9 +12,9 @@ export const AuthorizedHeader = () => {
 
   return (
     <div className={classes['header-buttons']}>
-      <button type="button" className={classes['create-article']}>
+      <Link to="/new-article" className={classes['create-article']}>
         create article
-      </button>
+      </Link>
       <Link to="profile">
         <span>{username}</span>
         <img src={avatar} alt="avatar" />
@@ -25,7 +25,7 @@ export const AuthorizedHeader = () => {
         onClick={() => {
           dispatch(setNotAuthorized());
           localStorage.clear();
-          navigation('../article');
+          navigation('../articles');
         }}
       >
         log out

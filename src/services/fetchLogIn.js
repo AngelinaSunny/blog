@@ -37,9 +37,8 @@ export const fetchLogIn = (data) => (dispatch) => {
       dispatch(setToken(json.user.token));
       dispatch(setNewPassword(data.password));
       dispatch(setIsAuthorized());
-      localStorage.setItem('username', json.user.username);
-      localStorage.setItem('email', json.user.email);
-      localStorage.setItem('isAuthorized', true);
+      localStorage.setItem('token', json.user.token);
+
       return 'ok';
     });
   return res;
