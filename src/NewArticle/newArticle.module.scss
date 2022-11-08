@@ -9,6 +9,7 @@
     0px 4.91399px 23.6765px rgba(0, 0, 0, 0.0417275), 0px 2.75474px 13.2728px rgba(0, 0, 0, 0.035),
     0px 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725), 0px 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
   border-radius: 6px;
+
   h6 {
     margin-bottom: 21px;
     text-align: center;
@@ -18,9 +19,9 @@
   }
   form {
     width: 100%;
-
     font: $font_roboto_normal;
     font-size: 0.875rem;
+
     button {
       cursor: pointer;
       border-radius: 4px;
@@ -28,6 +29,7 @@
     label {
       display: block;
       margin-bottom: 21px;
+
       input,
       textarea {
         width: 100%;
@@ -69,9 +71,11 @@
     .tags-wrap {
       display: flex;
       align-items: flex-end;
+
       div {
         display: flex;
         flex-direction: column;
+
         label {
           margin-bottom: 5px;
         }

@@ -1,9 +1,18 @@
 import { fetchArticles, fetchError, fetchIsLoading } from '../redux/actions/articles';
 
+const token = localStorage.getItem('token');
+
 export const getArticles =
   (page = 0) =>
   (dispatch) =>
-    fetch(`https://blog.kata.academy/api/articles?offset=${page}`)
+    fetch(`https://blog.kata.academy/api/articles?offset=${page}`, {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: token ? `Token ${token}` : '',
+      },
+    })
       .then((res) => {
         if (!res.ok) {
           dispatch(fetchError());

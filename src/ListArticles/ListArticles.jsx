@@ -13,6 +13,7 @@ import classes from './ListArticles.module.scss';
 
 export const ListArticles = () => {
   const { articlesList, articlesCount, isLoading, error, offset } = useSelector((store) => store.articles);
+  const { isAuthorized } = useSelector((store) => store.personLogIn);
   const dispatch = useDispatch();
 
   const items = articlesList.map((el) => <Article key={uuidv4()} {...el} />);
@@ -20,7 +21,7 @@ export const ListArticles = () => {
 
   useEffect(() => {
     dispatch(getArticles(offset));
-  }, [offset]);
+  }, [offset, isAuthorized]);
 
   return error ? (
     <div className={classes.articles}>

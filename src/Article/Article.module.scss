@@ -6,31 +6,37 @@
   grid-template-columns: auto 240px;
   justify-content: space-between;
   align-items: start;
+
+  width: 100%;
   margin: 0 auto 26px;
   padding: 15px 16px;
   min-height: 140px;
-  background-color: #fff;
-  width: 100%;
 
+  background-color: #fff;
   box-shadow: (0px 4px 12px rgba(0, 0, 0, 0.15));
   font: $font_inter;
+
   .info {
     grid-area: info;
     div > .header {
       display: inline-block;
+      margin-right: 13px;
+
       color: $link;
       font-size: 1.25rem;
       text-decoration: none;
-      margin-right: 13px;
     }
     div > button {
       height: 16px;
       width: 16px;
+
       background-color: #fff;
       border: none;
       cursor: pointer;
+
       .empty {
         font-size: 1.2rem;
+        line-height: 0%;
         color: #000;
       }
       .red {
@@ -38,24 +44,24 @@
         color: red;
       }
     }
+
     div > span {
       display: inline-block;
-      font-size: 0.75rem;
       margin-left: 5px;
-      vertical-align: middle;
       padding-bottom: 5px;
+      vertical-align: middle;
+      font-size: 0.75rem;
     }
     .tag > div {
       display: inline-block;
-      margin-right: 8px;
-      font-size: 0.75rem;
-
-      border-radius: 2px;
-      padding: 0 3px;
       width: auto;
-      border: 1px solid $text-color;
+      margin-right: 8px;
+      padding: 0 3px;
+
+      font-size: 0.75rem;
       color: $text-color;
-      border-color: $text-color;
+      border-radius: 2px;
+      border: 1px solid $text-color;
     }
     .tag > div:not(:first-child) {
       color: $data-gray;
@@ -76,15 +82,15 @@
     }
     .data {
       grid-area: data;
-      color: $data-gray;
       font-size: 0.75rem;
+      color: $data-gray;
     }
     img {
       grid-area: img;
       width: 46px;
       height: 46px;
-      border-radius: 50%;
       margin-left: 12px;
+      border-radius: 50%;
     }
   }
   .description {

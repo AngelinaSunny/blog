@@ -5,6 +5,7 @@
   min-height: 600px;
   margin-top: 33px;
   padding: 48px 32px;
+
   background-color: #fff;
   border: 1px solid #d9d9d9;
   box-shadow: 0px 22px 106px rgba(0, 0, 0, 0.07), 0px 9.19107px 44.2843px rgba(0, 0, 0, 0.0503198),
@@ -13,17 +14,17 @@
   border-radius: 6px;
 
   h6 {
+    margin-bottom: 20px;
     font: $font_roboto_bold;
     font-size: 1.25rem;
     color: $form-header;
-    margin-bottom: 20px;
     text-align: center;
   }
   input {
     width: 100%;
+    padding: 8px 5px;
     border: 1px solid $placeholder;
     border-radius: 4px;
-    padding: 8px 5px;
   }
   input::placeholder {
     font: $font_roboto_normal;
@@ -41,9 +42,10 @@
   }
   label {
     display: block;
+    margin-bottom: 12px;
     font: $font_roboto_normal;
     font-size: 0.875rem;
-    margin-bottom: 12px;
+
     p {
       margin-bottom: 3px;
     }
@@ -63,6 +65,7 @@
     width: 100%;
     height: 40px;
     margin-bottom: 8px;
+
     background-color: $link;
     border: none;
     border-radius: 4px;

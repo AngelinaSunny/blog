@@ -32,6 +32,7 @@
         .empty {
           font-size: 1.2rem;
           color: #000;
+          line-height: 0%;
         }
         .red {
           font-size: 1rem;
@@ -87,11 +88,12 @@
         grid-area: img;
         width: 46px;
         height: 46px;
-        border-radius: 50%;
         margin-left: 12px;
+        border-radius: 50%;
       }
       .button-wrap {
         display: contents;
+
         button,
         a {
           height: 31px;
@@ -103,32 +105,33 @@
           cursor: pointer;
         }
         .delete {
-          color: red;
-          border-color: red;
           width: 78px;
           position: relative;
+          color: red;
+          border-color: red;
         }
         .edit {
           display: block;
+          width: 65px;
+          padding-top: 5px;
           color: $green;
           border-color: $green;
-          width: 65px;
           text-decoration: none;
           text-align: center;
-          padding-top: 5px;
         }
         .modal {
           position: absolute;
           z-index: 1;
           top: 63px;
           left: 157px;
-
           width: 250px;
           height: 115px;
+
           background-image: url('./top.png');
           background-repeat: no-repeat;
           background-size: 110% 110%;
           color: $text-color;
+
           p {
             padding: 20px 15px 10px 50px;
             position: relative;
@@ -163,10 +166,10 @@
     }
     .description {
       grid-area: description;
+      margin-bottom: 16px;
       color: $data-gray;
       font-size: 0.75rem;
       line-height: 1.8em;
-      margin-bottom: 16px;
     }
   }
 

@@ -7,6 +7,7 @@ import { PacmanLoader } from 'react-spinners';
 import { Suspense, useState } from 'react';
 
 import { deleteArticle } from '../services/deleteArticle';
+import { fetchFavorite } from '../services/fetchFavorite';
 
 import classes from './slugArticle.module.scss';
 
@@ -17,6 +18,8 @@ export const SlugArticle = () => {
   const { isAuthorized, username } = useSelector((state) => state.personLogIn);
   const location = useLocation();
   const slug = location.pathname;
+  const slugLike = slug.split('/')[2];
+
   const navigation = useNavigate();
 
   const handleClickOpen = () => {
@@ -39,7 +42,20 @@ export const SlugArticle = () => {
                   <div className={classes.info}>
                     <div>
                       <h6 className={classes.header}>{art.title}</h6>
-                      <button type="button" disabled={!isAuthorized}>
+                      <button
+                        type="button"
+                        disabled={!isAuthorized}
+                        onClick={() => {
+                          if (art.favorited) {
+                            fetchFavorite(slugLike, 'DELETE');
+                            window.location.reload();
+                          }
+                          if (!art.favorited) {
+                            fetchFavorite(slugLike, 'POST');
+                            window.location.reload();
+                          }
+                        }}
+                      >
                         {art.favorited ? (
                           <span className={classes.red}> ❤ </span>
                         ) : (
@@ -125,7 +141,15 @@ export const SlugArticle = () => {
 };
 
 async function fetchArticle(slug) {
-  const res = await fetch(`https://blog.kata.academy/api/articles/${slug}`)
+  const token = localStorage.getItem('token');
+  const res = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: token ? `Token ${token}` : '',
+    },
+  })
     .then((result) => {
       if (!result.ok) {
         throw new Response('', { status: result.status, statusText: 'Not found' });

@@ -1,6 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 
 import { Layout } from '../Layout/Layout';
 import { SlugArticle, getSlugArticle } from '../SlugArticle/SlugArticle';
@@ -36,10 +36,11 @@ const router = createBrowserRouter(
 );
 
 export const App = () => {
+  const { isAuthorized } = useSelector((state) => state.personLogIn);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAuthorizedUser());
-  }, []);
+  }, [isAuthorized]);
 
   return <RouterProvider router={router} />;
 };
